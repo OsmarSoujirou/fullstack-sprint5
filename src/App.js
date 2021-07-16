@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import './App.css';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import Message from './components/Message';
@@ -11,6 +10,7 @@ import MessageContext from './contexts/MessageContext';
 import useLoading from './hooks/useLoading';
 import ProductsPage from './pages/products/ProductsPage';
 import CategoriesService from './services/CategoriesService';
+import { GlobalStyle } from './components/GlobalStyle';
 
 function App() {
   const [filter, setFilter] = useState('');
@@ -24,8 +24,8 @@ function App() {
   function loadCategories() {
     addRequest();
     CategoriesService.get()
-      .then(c => setCategories(c))
-      .catch(() => setMessage("Ocorreu um erro ao carregar as categorias..."))
+      .then((c) => setCategories(c))
+      .catch(() => setMessage('Ocorreu um erro ao carregar as categorias...'))
       .finally(() => removeRequest());
   }
 
@@ -36,11 +36,12 @@ function App() {
           <CategoriesContext.Provider value={{ categories }}>
             <Spinner></Spinner>
             <div className="page-container">
+              <GlobalStyle />
               <Message></Message>
               <Header></Header>
-              <ProductsPage></ProductsPage>
+              <ProductsPage />
             </div>
-            <Footer></Footer>
+            <Footer />
           </CategoriesContext.Provider>
         </MessageContext.Provider>
       </LoadingContext.Provider>

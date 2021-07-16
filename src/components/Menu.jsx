@@ -1,26 +1,54 @@
-import { useContext } from "react";
-import CategoriesContext from "../contexts/CategoriesContext";
+import { useContext } from 'react';
+import CategoriesContext from '../contexts/CategoriesContext';
+import styled from 'styled-components';
+
+const StyledMenu = styled.nav`
+  @media (max-width: 1200px) {
+    display: none;
+  }
+
+  .menu__list {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .menu__link {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: #000;
+    text-transform: uppercase;
+    padding-bottom: 5px;
+    vertical-align: baseline;
+  }
+
+  .menu__link:hover {
+    border-bottom: 2px solid #000;
+  }
+`;
 
 function MenuItem({ label }) {
-    return (
-        <li className="menu__item">
-            <a className="menu__link" href="#home">
-                <span>{label}</span>
-            </a>
-        </li>
-    );
+  return (
+    <li className="menu__item">
+      <a className="menu__link" href="#home">
+        <span>{label}</span>
+      </a>
+    </li>
+  );
 }
 
 function Menu() {
-    const { categories } = useContext(CategoriesContext);
+  const { categories } = useContext(CategoriesContext);
 
-    return (
-        <nav className="header__menu menu">
-            <ul className="menu__list">
-                {categories.all && categories.all.map(m => <MenuItem key={m.id} label={m.label} />)}
-            </ul>
-        </nav>
-    );
+  return (
+    <StyledMenu>
+      <ul className="menu__list">
+        {categories.all &&
+          categories.all.map((m) => <MenuItem key={m.id} label={m.label} />)}
+      </ul>
+    </StyledMenu>
+  );
 }
 
 export default Menu;
