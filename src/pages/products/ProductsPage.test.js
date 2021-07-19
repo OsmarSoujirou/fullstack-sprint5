@@ -14,47 +14,47 @@ jest.mock('./components/Breadcrumbs');
 jest.mock('../../services/ProductsService');
 
 describe('ProductsPage', () => {
-  it('Rendeziração & Retorno', async () => {
-    ProductView.mockImplementation(() => <div>Product</div>);
-    Breadcrumbs.mockImplementation(() => <div>Breadcrumbs</div>);
-    ProductsService.get.mockResolvedValue({
-      products: [
-        {
-          sku: 666,
-          image: 'assets/c12.webp',
-          name: 'Camiseta 666',
-          price: '666',
-        },
-        {
-          sku: 666,
-          image: 'assets/c12.webp',
-          name: 'Camiseta 666',
-          price: '666',
-        },
-      ],
-      filters: [
-        {
-          id: '666',
-          label: '666',
-        },
-      ],
-    });
+	it('Rendeziração & Retorno', async () => {
+		ProductView.mockImplementation(() => <div>Product</div>);
+		Breadcrumbs.mockImplementation(() => <div>Breadcrumbs</div>);
+		ProductsService.get.mockResolvedValue({
+			products: [
+				{
+					sku: 666,
+					image: 'assets/c12.webp',
+					name: 'Camiseta 666',
+					price: '666',
+				},
+				{
+					sku: 666,
+					image: 'assets/c12.webp',
+					name: 'Camiseta 666',
+					price: '666',
+				},
+			],
+			filters: [
+				{
+					id: '666',
+					label: '666',
+				},
+			],
+		});
 
-    const filter = 'Camiseta';
-    const addRequest = jest.fn(() => {});
-    const removeRequest = jest.fn(() => {});
-    const setMessage = jest.fn(() => {});
+		const filter = 'Camiseta';
+		const addRequest = jest.fn(() => {});
+		const removeRequest = jest.fn(() => {});
+		const setMessage = jest.fn(() => {});
 
-    render(
-      <MessageContext.Provider value={setMessage}>
-        <LoadingContext.Provider value={{ addRequest, removeRequest }}>
-          <FilterContext.Provider value={filter}>
-            <MemoryRouter initialEntries={['/']}>
-              <ProductsPage />
-            </MemoryRouter>
-          </FilterContext.Provider>
-        </LoadingContext.Provider>
-      </MessageContext.Provider>,
-    );
-  });
+		render(
+			<MessageContext.Provider value={setMessage}>
+				<LoadingContext.Provider value={{ addRequest, removeRequest }}>
+					<FilterContext.Provider value={filter}>
+						<MemoryRouter initialEntries={['/']}>
+							<ProductsPage />
+						</MemoryRouter>
+					</FilterContext.Provider>
+				</LoadingContext.Provider>
+			</MessageContext.Provider>
+		);
+	});
 });

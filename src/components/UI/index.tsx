@@ -38,84 +38,84 @@ import ImgSelo from '../../assets/ra1000.webp';
 
 // Styled's
 const LogoRiachuelo = styled.img`
-  height: 25px;
-  transform: translateY(10px);
+	height: 25px;
+	transform: translateY(10px);
 `;
 
 const IconMenu = styled.img``;
 
 const SetaFilter = styled.img`
-  height: 20px;
-  margin-left: 8px;
+	height: 20px;
+	margin-left: 8px;
 `;
 
 const AppImg = styled.img`
-  width: 110px;
-  margin-left: 8px;
+	width: 110px;
+	margin-left: 8px;
 `;
 
 const IconFoot = styled.img`
-  display: block;
-  margin: auto;
-  width: 25px;
+	display: block;
+	margin: auto;
+	width: 25px;
 `;
 
 const IconPayment = styled.img`
-  margin: 2px;
-  width: auto;
+	margin: 2px;
+	width: auto;
 `;
 const IconSocial = styled.img`
-  display: block;
-  margin: auto;
+	display: block;
+	margin: auto;
 `;
 const IconLupa = styled.img`
-  width: 24px;
-  opacity: 26%;
-  top: 8px;
-  position: absolute;
-  padding-left: 10px;
-  color: rgba(0, 0, 0, 0.26);
-  line-height: 40px;
+	width: 24px;
+	opacity: 26%;
+	top: 8px;
+	position: absolute;
+	padding-left: 10px;
+	color: rgba(0, 0, 0, 0.26);
+	line-height: 40px;
 `;
 
 interface NameMap {
-  [name: string]: JSX.Element;
+	[name: string]: JSX.Element;
 }
 // Função exporta imagem
 export function ImgBase(filter: string) {
-  const Images: NameMap = {
-    LogoRiachuelo: <LogoRiachuelo src={ImgLogoG} alt="Logo" />,
-    LogoRchlo: <LogoRiachuelo src={ImgLogoP} alt="Logo" />,
-    IconLupa: <IconLupa src={ImgLupa} alt="lupa" />,
-    SetaFiltro: <SetaFilter src={ImgSeta} alt="" />,
-    AppAndroid: <AppImg src={ImgAndroid} alt="Google Play" />,
-    AppIOS: <AppImg src={ImgIOS} alt="App Store" />,
-    IconAtend: <IconFoot src={ImgAttend} alt="Atendimento" />,
-    IconFaq: <IconFoot src={ImgFaq} alt="Perguntas Frequentes" />,
-    IconInvoice: <IconFoot src={ImgInvoice} alt="Fatura e Extrato" />,
-    IconWork: <IconFoot src={ImgWork} alt="Trabalhe Conosco" />,
-    IconMenuOpen: <IconMenu src={ImgMenuOpen} alt="menu" />,
-    IconMenuClose: <IconMenu src={ImgMenuClose} alt="fechar menu" />,
-    IconPay1: <IconPayment src={ImgPay1} alt="" />,
-    IconPay2: <IconPayment src={ImgPay2} alt="" />,
-    IconPay3: <IconPayment src={ImgPay3} alt="" />,
-    IconPay4: <IconPayment src={ImgPay4} alt="" />,
-    IconPay5: <IconPayment src={ImgPay5} alt="" />,
-    IconPay6: <IconPayment src={ImgPay6} alt="" />,
-    IconPay7: <IconPayment src={ImgPay7} alt="" />,
-    IconPay8: <IconPayment src={ImgPay8} alt="" />,
-    IconPay9: <IconPayment src={ImgPay9} alt="" />,
-    IconPay10: <IconPayment src={ImgPay10} alt="" />,
-    IconSocial1: <IconSocial src={ImgSocial1} alt="" />,
-    IconSocial2: <IconSocial src={ImgSocial2} alt="" />,
-    IconSocial3: <IconSocial src={ImgSocial3} alt="" />,
-    IconSocial4: <IconSocial src={ImgSocial4} alt="" />,
-    IconSocial5: <IconSocial src={ImgSocial5} alt="" />,
-    IconSocial6: <IconSocial src={ImgSocial6} alt="" />,
-    IconSocial7: <IconSocial src={ImgSocial7} alt="" />,
-    IconAcess: <IconSocial src={ImgAcess} alt="" />,
-    IconSelo: <img src={ImgSelo} alt="" />,
-  };
+	const Images: NameMap = {
+		LogoRiachuelo: <LogoRiachuelo src={ImgLogoG} alt="Logo" />,
+		LogoRchlo: <LogoRiachuelo src={ImgLogoP} alt="Logo" />,
+		IconLupa: <IconLupa src={ImgLupa} alt="lupa" />,
+		SetaFiltro: <SetaFilter src={ImgSeta} alt="" />,
+		AppAndroid: <AppImg src={ImgAndroid} alt="Google Play" />,
+		AppIOS: <AppImg src={ImgIOS} alt="App Store" />,
+		IconAtend: <IconFoot src={ImgAttend} alt="Atendimento" />,
+		IconFaq: <IconFoot src={ImgFaq} alt="Perguntas Frequentes" />,
+		IconInvoice: <IconFoot src={ImgInvoice} alt="Fatura e Extrato" />,
+		IconWork: <IconFoot src={ImgWork} alt="Trabalhe Conosco" />,
+		IconMenuOpen: <IconMenu src={ImgMenuOpen} alt="menu" />,
+		IconMenuClose: <IconMenu src={ImgMenuClose} alt="fechar menu" />,
+		IconPay1: <IconPayment src={ImgPay1} alt="" />,
+		IconPay2: <IconPayment src={ImgPay2} alt="" />,
+		IconPay3: <IconPayment src={ImgPay3} alt="" />,
+		IconPay4: <IconPayment src={ImgPay4} alt="" />,
+		IconPay5: <IconPayment src={ImgPay5} alt="" />,
+		IconPay6: <IconPayment src={ImgPay6} alt="" />,
+		IconPay7: <IconPayment src={ImgPay7} alt="" />,
+		IconPay8: <IconPayment src={ImgPay8} alt="" />,
+		IconPay9: <IconPayment src={ImgPay9} alt="" />,
+		IconPay10: <IconPayment src={ImgPay10} alt="" />,
+		IconSocial1: <IconSocial src={ImgSocial1} alt="" />,
+		IconSocial2: <IconSocial src={ImgSocial2} alt="" />,
+		IconSocial3: <IconSocial src={ImgSocial3} alt="" />,
+		IconSocial4: <IconSocial src={ImgSocial4} alt="" />,
+		IconSocial5: <IconSocial src={ImgSocial5} alt="" />,
+		IconSocial6: <IconSocial src={ImgSocial6} alt="" />,
+		IconSocial7: <IconSocial src={ImgSocial7} alt="" />,
+		IconAcess: <IconSocial src={ImgAcess} alt="" />,
+		IconSelo: <img src={ImgSelo} alt="" />,
+	};
 
-  return Images[filter];
+	return Images[filter];
 }
