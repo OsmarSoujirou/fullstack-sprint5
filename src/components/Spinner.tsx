@@ -59,10 +59,10 @@ const StyledLoading = styled.div`
   }
 `;
 
-function Spinner() {
+function Spinner(): JSX.Element {
   const { isLoading } = useContext(LoadingContext);
 
-  return isLoading() && <StyledLoading />;
+  return isLoading() ? <StyledLoading /> : <></>;
 }
 
 export default Spinner;

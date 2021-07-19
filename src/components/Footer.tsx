@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ImgBase } from './UI/';
+import { ImgBase } from './UI';
 
 const StyledFooter = styled.footer`
   border-top: 2px solid lightgray;
@@ -216,7 +216,7 @@ const StyledFooter = styled.footer`
     margin: 0 auto;
   }
 `;
-function Footer() {
+const Footer: React.FC = () => {
   return (
     <StyledFooter>
       <section className="footer__contact">
@@ -509,6 +509,6 @@ function Footer() {
       </section>
     </StyledFooter>
   );
-}
+};
 
 export default Footer;

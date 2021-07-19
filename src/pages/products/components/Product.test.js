@@ -1,9 +1,6 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import ProductView from './Product';
 import { MemoryRouter, Route } from 'react-router-dom';
-
-//jest.mock('./Menu');
-//Menu.mockImplementation(() => <div>Menu</div>);
 
 describe('Componete Product', () => {
   it('Renderização e Retorno', () => {
@@ -26,5 +23,9 @@ describe('Componete Product', () => {
     );
     const Element = screen.getByText(/Jaqueta/i);
     expect(Element).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText('ADICIONAR Á SACOLA'));
+    fireEvent.click(screen.getByText('10'));
+    fireEvent.click(screen.getByText('ADICIONAR Á SACOLA'));
   });
 });

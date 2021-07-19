@@ -3,8 +3,11 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import Message from './components/Message';
 import Spinner from './components/Spinner';
-import CategoriesContext from './contexts/CategoriesContext';
-import FilterContext from './contexts/FilterContext';
+import {
+  CategoriesContext,
+  FaceCategoriesState,
+} from './contexts/CategoriesContext';
+import { FilterContext } from './contexts/FilterContext';
 import LoadingContext from './contexts/LoadingContext';
 import MessageContext from './contexts/MessageContext';
 import useLoading from './hooks/useLoading';
@@ -15,7 +18,9 @@ import { GlobalStyle } from './components/GlobalStyle';
 function App() {
   const [filter, setFilter] = useState('');
   const [message, setMessage] = useState('');
-  const [categories, setCategories] = useState({});
+  const [categories, setCategories] = useState<FaceCategoriesState>(
+    {} as FaceCategoriesState,
+  );
   const [addRequest, removeRequest, isLoading] = useLoading();
 
   // eslint-disable-next-line
@@ -24,7 +29,7 @@ function App() {
   function loadCategories() {
     addRequest();
     CategoriesService.get()
-      .then((c) => setCategories(c))
+      .then((c: FaceCategoriesState) => setCategories(c))
       .catch(() => setMessage('Ocorreu um erro ao carregar as categorias...'))
       .finally(() => removeRequest());
   }
@@ -34,10 +39,10 @@ function App() {
       <LoadingContext.Provider value={{ addRequest, removeRequest, isLoading }}>
         <MessageContext.Provider value={{ message, setMessage }}>
           <CategoriesContext.Provider value={{ categories }}>
-            <Spinner></Spinner>
+            <Spinner />
             <div className="page-container">
               <GlobalStyle />
-              <Message></Message>
+              <Message />
               <Header></Header>
               <ProductsPage />
             </div>

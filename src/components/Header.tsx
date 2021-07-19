@@ -1,8 +1,45 @@
 import { useContext } from 'react';
-import FilterContext from '../contexts/FilterContext';
+import { FilterContext, FaceFilterContext } from '../contexts/FilterContext';
+
 import Menu from './Menu';
 import styled from 'styled-components';
 import { ImgBase } from './UI';
+
+const Header: React.FC = (): JSX.Element => {
+  const { setFilter } = useContext<FaceFilterContext>(FilterContext);
+
+  return (
+    <StyledHeader>
+      <div className="header__container">
+        <div className="header__mobile">
+          <div className="header__drawer menu header__drawer--active">
+            {ImgBase('IconMenuOpen')}
+            <p className="menu__title">menu</p>
+          </div>
+          <div className="header__drawer close">
+            {ImgBase('IconMenuClose')}
+            <p className="close__title">fechar</p>
+          </div>
+          <h1 className="header__logo">{ImgBase('LogoRchlo')}</h1>
+        </div>
+        <div className="header__desktop">
+          <h1 className="header__logo">{ImgBase('LogoRiachuelo')}</h1>
+        </div>
+        <div className="header__search">
+          {ImgBase('IconLupa')}
+          <input
+            className="header__input"
+            type="search"
+            placeholder="O que você está procurando?"
+            onChange={(event) => setFilter(event.target.value)}
+          />
+        </div>
+
+        <Menu />
+      </div>
+    </StyledHeader>
+  );
+};
 
 const StyledHeader = styled.header`
   width: 100%;
@@ -94,41 +131,5 @@ const StyledHeader = styled.header`
     line-height: 0;
   }
 `;
-
-function Header() {
-  const { setFilter } = useContext(FilterContext);
-
-  return (
-    <StyledHeader>
-      <div className="header__container">
-        <div className="header__mobile">
-          <div className="header__drawer menu header__drawer--active">
-            {ImgBase('IconMenuOpen')}
-            <p className="menu__title">menu</p>
-          </div>
-          <div className="header__drawer close">
-            {ImgBase('IconMenuClose')}
-            <p className="close__title">fechar</p>
-          </div>
-          <h1 className="header__logo">{ImgBase('LogoRchlo')}</h1>
-        </div>
-        <div className="header__desktop">
-          <h1 className="header__logo">{ImgBase('LogoRiachuelo')}</h1>
-        </div>
-        <div className="header__search">
-          {ImgBase('IconLupa')}
-          <input
-            className="header__input"
-            type="search"
-            placeholder="O que você está procurando?"
-            onChange={(event) => setFilter(event.target.value)}
-          />
-        </div>
-
-        <Menu />
-      </div>
-    </StyledHeader>
-  );
-}
 
 export default Header;

@@ -1,10 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Menu from './Menu';
-import CategoriesContext from '../contexts/CategoriesContext';
-
-//jest.mock('./Menu');
-//Menu.mockImplementation(() => <div>Menu</div>);
+import { CategoriesContext } from '../contexts/CategoriesContext';
 
 describe('Componete Menu', () => {
   it('Renderização e Retorno', () => {

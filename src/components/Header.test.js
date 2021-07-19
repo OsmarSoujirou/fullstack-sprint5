@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import Header from './Header';
 import Menu from './Menu';
-import FilterContext from '../contexts/FilterContext';
+import { FilterContext } from '../contexts/FilterContext';
 
 jest.mock('./Menu');
 

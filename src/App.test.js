@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import App from './App';
 import CategoriesService from './services/CategoriesService';
 import MessageContext from './contexts/MessageContext';
-import CategoriesContext from './contexts/CategoriesContext';
+import { CategoriesContext } from './contexts/CategoriesContext';
 
 jest.mock('./services/CategoriesService');
 

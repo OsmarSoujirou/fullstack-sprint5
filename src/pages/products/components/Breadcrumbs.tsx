@@ -1,5 +1,9 @@
 import { useContext } from 'react';
-import CategoriesContext from '../../../contexts/CategoriesContext';
+import {
+  CategoriesContext,
+  FaceCategoriesContext,
+  FaceBreadcrumb,
+} from '../../../contexts/CategoriesContext';
 import styled from 'styled-components';
 
 const StyledBreadcumbs = styled.div`
@@ -54,25 +58,25 @@ const StyledBreadcumbs = styled.div`
   }
 `;
 
-function BreadcrumbItem({ link, label }) {
+function BreadcrumbItem({ link, name }: FaceBreadcrumb): JSX.Element {
   return (
     <li className="breadcrumbs__item">
       {link ? (
         <>
           <a className="breadcrumbs__link" href={link}>
-            {label}
+            {name}
           </a>
           <span className="breadcrumbs__item  breadcrumbs__separator">/</span>
         </>
       ) : (
-        <span className="breadcrumbs__link">{label}</span>
+        <span className="breadcrumbs__link">{name}</span>
       )}
     </li>
   );
 }
 
-function Breadcrumbs() {
-  const { categories } = useContext(CategoriesContext);
+function Breadcrumbs(): JSX.Element {
+  const { categories } = useContext<FaceCategoriesContext>(CategoriesContext);
 
   return (
     <StyledBreadcumbs>
@@ -80,8 +84,13 @@ function Breadcrumbs() {
         <nav>
           <ol className="breadcrumbs__list">
             {categories.current &&
-              categories.current.map((c) => (
-                <BreadcrumbItem key={c.id} link={c.link} label={c.name} />
+              categories.current.map((c, index) => (
+                <BreadcrumbItem
+                  key={index}
+                  link={c.link}
+                  name={c.name}
+                  id={c.id}
+                />
               ))}
           </ol>
         </nav>

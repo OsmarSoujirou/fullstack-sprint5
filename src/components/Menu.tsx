@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import CategoriesContext from '../contexts/CategoriesContext';
+import { CategoriesContext } from '../contexts/CategoriesContext';
 import styled from 'styled-components';
 
 const StyledMenu = styled.nav`
@@ -28,24 +28,34 @@ const StyledMenu = styled.nav`
   }
 `;
 
-function MenuItem({ label }) {
+interface MenuItemData {
+  label: string;
+  id?: number;
+  link: string;
+}
+
+function MenuItem({ label, link }: MenuItemData): JSX.Element {
   return (
     <li className="menu__item">
-      <a className="menu__link" href="#home">
+      <a className="menu__link" href={link}>
         <span>{label}</span>
       </a>
     </li>
   );
 }
 
-function Menu() {
+function Menu(): JSX.Element {
   const { categories } = useContext(CategoriesContext);
 
   return (
     <StyledMenu>
       <ul className="menu__list">
         {categories.all &&
-          categories.all.map((m) => <MenuItem key={m.id} label={m.label} />)}
+          categories.all.map(
+            (m: MenuItemData): JSX.Element => (
+              <MenuItem key={m.id} label={m.label} link={m.link} />
+            ),
+          )}
       </ul>
     </StyledMenu>
   );

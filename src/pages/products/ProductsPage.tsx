@@ -1,5 +1,5 @@
-import { useContext, useEffect, useState } from 'react';
-import FilterContext from '../../contexts/FilterContext';
+import React, { useContext, useEffect, useState } from 'react';
+import { FilterContext } from '../../contexts/FilterContext';
 import LoadingContext from '../../contexts/LoadingContext';
 import MessageContext from '../../contexts/MessageContext';
 import ProductsService from '../../services/ProductsService';
@@ -8,6 +8,115 @@ import Filters from './components/Filters';
 import ProductView from './components/Product';
 import styled from 'styled-components';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+
+interface FaceProducts {
+  name: string;
+  image: string;
+  price: string;
+  sku: number;
+}
+function Product({ image, name, price, sku }: FaceProducts): JSX.Element {
+  return (
+    <li className="products__card card">
+      <div className="card">
+        <Link to={`/product/${sku}`}>
+          <img className="card__img" src={image} alt="" />
+          <p className="card__description">{name}</p>
+          <p className="card__price">R$ {price}</p>
+        </Link>
+      </div>
+    </li>
+  );
+}
+
+function ProductsPage() {
+  const [products, setProducts] = React.useState<FaceProduct[]>([]);
+  const [filters, setFilters] = useState<FaceFilter[]>([]);
+  const { filter } = useContext(FilterContext);
+  const { addRequest, removeRequest } = useContext(LoadingContext);
+  const { setMessage } = useContext(MessageContext);
+
+  useEffect(() => {
+    loadProducts();
+    // eslint-disable-next-line
+  }, []);
+
+  interface IProductsRequest {
+    products: FaceProduct[];
+    filters: FaceFilter[];
+  }
+  interface FaceProduct {
+    sku: number;
+    image: string;
+    name: string;
+    price: string;
+  }
+
+  interface FaceFilter {
+    id: string;
+    label: string;
+  }
+
+  function loadProducts(): void {
+    addRequest();
+    ProductsService.get()
+      .then((r: IProductsRequest) => {
+        setProducts(r.products);
+        setFilters(r.filters);
+      })
+      .catch(() => setMessage('Ocorreu um erro ao carregar os produtos...'))
+      .finally(() => removeRequest());
+  }
+
+  return (
+    <StyledMain>
+      <section className="main__products products">
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <Breadcrumbs />
+              <Filters filters={filters}></Filters>
+              <div className="products__row">
+                <ol className="products__list">
+                  {products
+                    .filter((p) =>
+                      filter
+                        ? p.name.toUpperCase().indexOf(filter.toUpperCase()) !==
+                          -1
+                        : true,
+                    )
+                    .map((p, i) => (
+                      <Product
+                        key={i}
+                        sku={p.sku}
+                        image={p.image}
+                        name={p.name}
+                        price={p.price}
+                      />
+                    ))}
+                </ol>
+              </div>
+            </Route>
+            <Route path="/product/:id">
+              {products.length > 0 && (
+                <ProductView products={products} msg={setMessage} />
+              )}
+            </Route>
+            <Route>
+              <div>
+                <br />
+                Ops! 404
+                <br />
+                <br />
+                Não conseguimos encontrar a página que você está procurando..
+              </div>
+            </Route>
+          </Switch>
+        </Router>
+      </section>
+    </StyledMain>
+  );
+}
 
 const StyledMain = styled.main`
   margin: 0 auto;
@@ -83,93 +192,4 @@ const StyledMain = styled.main`
     text-align: center;
   }
 `;
-
-function Product({ image, name, price, sku }) {
-  // console.log(teste);
-  return (
-    <li className="products__card card">
-      <div className="card">
-        <Link to={`/product/${sku}`}>
-          <img className="card__img" src={image} alt="" />
-          <p className="card__description">{name}</p>
-          <p className="card__price">R$ {price}</p>
-        </Link>
-      </div>
-    </li>
-  );
-}
-
-function ProductsPage() {
-  const [products, setProducts] = useState([]);
-  const [filters, setFilters] = useState([]);
-  const { filter } = useContext(FilterContext);
-  const { addRequest, removeRequest } = useContext(LoadingContext);
-  const { setMessage } = useContext(MessageContext);
-
-  useEffect(() => {
-    loadProducts();
-    // eslint-disable-next-line
-  }, []);
-
-  function loadProducts() {
-    addRequest();
-    ProductsService.get()
-      .then((r) => {
-        setProducts([...r.products]);
-        setFilters([...r.filters]);
-      })
-      .catch(() => setMessage('Ocorreu um erro ao carregar os produtos...'))
-      .finally(() => removeRequest());
-  }
-
-  return (
-    <StyledMain>
-      <section className="main__products products">
-        <Router>
-          <Switch>
-            <Route exact path="/">
-              <Breadcrumbs />
-              <Filters filters={filters}></Filters>
-              <div className="products__row">
-                <ol className="products__list">
-                  {products
-                    .filter((p) =>
-                      filter
-                        ? p.name.toUpperCase().indexOf(filter.toUpperCase()) !==
-                          -1
-                        : true,
-                    )
-                    .map((p, i) => (
-                      <Product
-                        key={p.sku}
-                        sku={p.sku}
-                        image={p.image}
-                        name={p.name}
-                        price={p.price}
-                      />
-                    ))}
-                </ol>
-              </div>
-            </Route>
-            <Route path="/product/:id">
-              {products.length > 0 && (
-                <ProductView products={products} msg={setMessage} />
-              )}
-            </Route>
-            <Route>
-              <center>
-                <br />
-                Ops! 404
-                <br />
-                <br />
-                Não conseguimos encontrar a página que você está procurando..
-              </center>
-            </Route>
-          </Switch>
-        </Router>
-      </section>
-    </StyledMain>
-  );
-}
-
 export default ProductsPage;

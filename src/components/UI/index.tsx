@@ -77,9 +77,13 @@ const IconLupa = styled.img`
   color: rgba(0, 0, 0, 0.26);
   line-height: 40px;
 `;
+
+interface NameMap {
+  [name: string]: JSX.Element;
+}
 // Função exporta imagem
-export const ImgBase = (filter) => {
-  const Images = {
+export function ImgBase(filter: string) {
+  const Images: NameMap = {
     LogoRiachuelo: <LogoRiachuelo src={ImgLogoG} alt="Logo" />,
     LogoRchlo: <LogoRiachuelo src={ImgLogoP} alt="Logo" />,
     IconLupa: <IconLupa src={ImgLupa} alt="lupa" />,
@@ -92,7 +96,6 @@ export const ImgBase = (filter) => {
     IconWork: <IconFoot src={ImgWork} alt="Trabalhe Conosco" />,
     IconMenuOpen: <IconMenu src={ImgMenuOpen} alt="menu" />,
     IconMenuClose: <IconMenu src={ImgMenuClose} alt="fechar menu" />,
-
     IconPay1: <IconPayment src={ImgPay1} alt="" />,
     IconPay2: <IconPayment src={ImgPay2} alt="" />,
     IconPay3: <IconPayment src={ImgPay3} alt="" />,
@@ -103,7 +106,6 @@ export const ImgBase = (filter) => {
     IconPay8: <IconPayment src={ImgPay8} alt="" />,
     IconPay9: <IconPayment src={ImgPay9} alt="" />,
     IconPay10: <IconPayment src={ImgPay10} alt="" />,
-
     IconSocial1: <IconSocial src={ImgSocial1} alt="" />,
     IconSocial2: <IconSocial src={ImgSocial2} alt="" />,
     IconSocial3: <IconSocial src={ImgSocial3} alt="" />,
@@ -111,12 +113,9 @@ export const ImgBase = (filter) => {
     IconSocial5: <IconSocial src={ImgSocial5} alt="" />,
     IconSocial6: <IconSocial src={ImgSocial6} alt="" />,
     IconSocial7: <IconSocial src={ImgSocial7} alt="" />,
-
     IconAcess: <IconSocial src={ImgAcess} alt="" />,
     IconSelo: <img src={ImgSelo} alt="" />,
-
-    default: <img src="teste" alt="Outro" />,
   };
 
-  return Images[filter] || Images.default;
-};
+  return Images[filter];
+}

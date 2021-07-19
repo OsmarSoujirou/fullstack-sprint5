@@ -34,18 +34,18 @@ const StyledMessage = styled.div`
   }
 `;
 
-function Message() {
+function Message(): JSX.Element {
   const { message, setMessage } = useContext(MessageContext);
 
-  return (
-    message && (
-      <StyledMessage className="alert">
-        <span className="closebtn" onClick={() => setMessage('')}>
-          &times;
-        </span>
-        {message}
-      </StyledMessage>
-    )
+  return message ? (
+    <StyledMessage className="alert">
+      <span className="closebtn" onClick={() => setMessage('')}>
+        &times;
+      </span>
+      {message}
+    </StyledMessage>
+  ) : (
+    <></>
   );
 }
 

@@ -1,6 +1,37 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ImgBase } from '../../../components/UI/';
+import { ImgBase } from '../../../components/UI';
+
+interface FaceFilter {
+  label: string;
+}
+
+interface FaceProps {
+  filters: FaceFilter[];
+}
+
+function FilterItem({ label }: FaceFilter) {
+  return (
+    <li className="filters__item">
+      <span className="filters__label">{label}</span>
+      {ImgBase('SetaFiltro')}
+    </li>
+  );
+}
+
+function Filters({ filters }: FaceProps) {
+  return (
+    <StyledFilter>
+      <section className="main__filters filters">
+        <ul className="filters__list">
+          {filters.map((f: FaceFilter, index: number) => (
+            <FilterItem key={index} label={f.label} />
+          ))}
+        </ul>
+      </section>
+    </StyledFilter>
+  );
+}
 
 const StyledFilter = styled.div`
   .main__filters {
@@ -41,28 +72,5 @@ const StyledFilter = styled.div`
     margin-left: 8px;
   }
 `;
-
-function FilterItem({ label }) {
-  return (
-    <li className="filters__item">
-      <span className="filters__label">{label}</span>
-      {ImgBase('SetaFiltro')}
-    </li>
-  );
-}
-
-function Filters({ filters }) {
-  return (
-    <StyledFilter>
-      <section className="main__filters filters">
-        <ul className="filters__list">
-          {filters.map((f) => (
-            <FilterItem key={f.id} label={f.label} />
-          ))}
-        </ul>
-      </section>
-    </StyledFilter>
-  );
-}
 
 export default Filters;
