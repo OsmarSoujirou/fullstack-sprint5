@@ -2,6 +2,20 @@ import { useContext } from 'react';
 import MessageContext from '../contexts/MessageContext';
 import styled from 'styled-components';
 
+function Message(): JSX.Element {
+	const { message, setMessage } = useContext(MessageContext);
+
+	return message ? (
+		<StyledMessage className="alert">
+			<span className="closebtn" onClick={() => setMessage('')}>
+				&times;
+			</span>
+			{message}
+		</StyledMessage>
+	) : (
+		<></>
+	);
+}
 const StyledMessage = styled.div`
 	padding: 20px;
 	background-color: #f44336;
@@ -33,20 +47,4 @@ const StyledMessage = styled.div`
 		color: black;
 	}
 `;
-
-function Message(): JSX.Element {
-	const { message, setMessage } = useContext(MessageContext);
-
-	return message ? (
-		<StyledMessage className="alert">
-			<span className="closebtn" onClick={() => setMessage('')}>
-				&times;
-			</span>
-			{message}
-		</StyledMessage>
-	) : (
-		<></>
-	);
-}
-
 export default Message;

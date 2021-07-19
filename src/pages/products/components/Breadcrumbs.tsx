@@ -6,6 +6,46 @@ import {
 } from '../../../contexts/CategoriesContext';
 import styled from 'styled-components';
 
+function BreadcrumbItem({ link, name }: FaceBreadcrumb): JSX.Element {
+	return (
+		<li className="breadcrumbs__item">
+			{link ? (
+				<>
+					<a className="breadcrumbs__link" href={link}>
+						{name}
+					</a>
+					<span className="breadcrumbs__item  breadcrumbs__separator">/</span>
+				</>
+			) : (
+				<span className="breadcrumbs__link">{name}</span>
+			)}
+		</li>
+	);
+}
+
+function Breadcrumbs(): JSX.Element {
+	const { categories } = useContext<FaceCategoriesContext>(CategoriesContext);
+
+	return (
+		<StyledBreadcumbs>
+			<section className="main__breadcrumbs breadcrumbs">
+				<nav>
+					<ol className="breadcrumbs__list">
+						{categories.current &&
+							categories.current.map((c, index) => (
+								<BreadcrumbItem
+									key={index}
+									link={c.link}
+									name={c.name}
+									id={c.id}
+								/>
+							))}
+					</ol>
+				</nav>
+			</section>
+		</StyledBreadcumbs>
+	);
+}
 const StyledBreadcumbs = styled.div`
 	.main__breadcrumbs {
 		margin-bottom: 16px;
@@ -57,46 +97,4 @@ const StyledBreadcumbs = styled.div`
 		user-select: none;
 	}
 `;
-
-function BreadcrumbItem({ link, name }: FaceBreadcrumb): JSX.Element {
-	return (
-		<li className="breadcrumbs__item">
-			{link ? (
-				<>
-					<a className="breadcrumbs__link" href={link}>
-						{name}
-					</a>
-					<span className="breadcrumbs__item  breadcrumbs__separator">/</span>
-				</>
-			) : (
-				<span className="breadcrumbs__link">{name}</span>
-			)}
-		</li>
-	);
-}
-
-function Breadcrumbs(): JSX.Element {
-	const { categories } = useContext<FaceCategoriesContext>(CategoriesContext);
-
-	return (
-		<StyledBreadcumbs>
-			<section className="main__breadcrumbs breadcrumbs">
-				<nav>
-					<ol className="breadcrumbs__list">
-						{categories.current &&
-							categories.current.map((c, index) => (
-								<BreadcrumbItem
-									key={index}
-									link={c.link}
-									name={c.name}
-									id={c.id}
-								/>
-							))}
-					</ol>
-				</nav>
-			</section>
-		</StyledBreadcumbs>
-	);
-}
-
 export default Breadcrumbs;

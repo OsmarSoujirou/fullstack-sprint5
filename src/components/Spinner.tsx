@@ -2,6 +2,12 @@ import { useContext } from 'react';
 import LoadingContext from '../contexts/LoadingContext';
 import styled from 'styled-components';
 
+function Spinner(): JSX.Element {
+	const { isLoading } = useContext(LoadingContext);
+
+	return isLoading() ? <StyledLoading /> : <></>;
+}
+
 const StyledLoading = styled.div`
 	position: fixed;
 	z-index: 999;
@@ -58,11 +64,5 @@ const StyledLoading = styled.div`
 		}
 	}
 `;
-
-function Spinner(): JSX.Element {
-	const { isLoading } = useContext(LoadingContext);
-
-	return isLoading() ? <StyledLoading /> : <></>;
-}
 
 export default Spinner;
