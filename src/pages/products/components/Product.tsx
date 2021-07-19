@@ -70,7 +70,10 @@ const ProductView = ({ products, msg }: FaceProps) => {
 			{product && (
 				<StyledProdutc>
 					<div className="product__image">
-						<img src={`http://localhost:3000/${image}`} alt="" />
+						<img
+							src={`https://fullstack-sprint5.herokuapp.com/${image}`}
+							alt=""
+						/>
 					</div>
 					<div className="product__description">
 						<h1 className="description__title">{name}</h1>
