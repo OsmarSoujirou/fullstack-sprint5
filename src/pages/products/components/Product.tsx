@@ -9,9 +9,9 @@ interface FaceSizes {
 }
 const Sizes = ({ sizes, setSize }: FaceSizes) => {
 	const [x, y] = sizes;
-	const newArray = [];
+	const newArray: Array<number> = [];
 
-	for (let i = parseInt(x); i <= parseInt(y); i = i + 2) {
+	for (let i: number = parseInt(x); i <= parseInt(y); i = i + 2) {
 		newArray.push(i);
 	}
 
